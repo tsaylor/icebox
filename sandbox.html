@@ -32,10 +32,15 @@
           var template_name = event.data.template_name
           var context = event.data.context
           event.source.postMessage({
+            command: "load_html",
             html: get_template(template_name)(context)
           }, event.origin);
         break;
       }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      parent.postMessage({command: 'ready'}, '*');
     });
   </script>
   </body>

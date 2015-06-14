@@ -8,43 +8,23 @@ function render(template_name, context) {
   iframe.contentWindow.postMessage(message, '*');
 }
 
-window.addEventListener('message', function(event) {
-  if (event.data.html) {
-    document.getElementById('body').innerHTML = event.data.html
-  } else {
-    document.getElementById('body').innerHTML = 'nodata'
-  }
-});
-
-document.addEventListener('DOMContentLoaded', function () {
+function display_page() {
   chrome.windows.getAll({populate: true}, function (windows) {
     render('all_tabs', {windows: windows})
   });
+}
+
+window.addEventListener('message', function(event) {
+  var command = event.data.command;
+  switch(command) {
+    case 'ready':
+      display_page();
+    case 'load_html':
+      if (event.data.html) {
+        document.getElementById('body').innerHTML = event.data.html
+      } else {
+        document.getElementById('body').innerHTML = 'nodata'
+      }
+    break;
+  }
 });
-
-// chrome.browserAction.onClicked.addListener(function () {
-//   render('hello', {thing: 'world'})
-// });
-
-// window.onload = function () {
-//   render('hello', {thing: 'world'})
-// };
-
-// chrome.browserAction.onClicked.addListener(function() {
-//   var iframe = document.getElementById('theFrame');
-//   var message = {
-//     command: 'render',
-//     context: {thing: 'world'}
-//   };
-//   iframe.contentWindow.postMessage(message, '*');
-// });
-
-// window.addEventListener('message', function(event) {
-//   if (event.data.html) {
-//     new Notification('Templated!', {
-//       icon: 'icon.png',
-//       body: 'HTML Received for "' + event.data.name + '": `' +
-//           event.data.html + '`'
-//     });
-//   }
-// });
