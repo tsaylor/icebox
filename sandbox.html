@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+  <script src="handlebars-v3.0.3.js"></script>
+  </head>
+  <body>
+  <script id="all_tabs" type="text/x-handlebars-template">
+    {{#windows}}
+    <ul>
+      {{#tabs}}
+      <li><a href="{{url}}">{{title}}</a></li>
+      {{/tabs}}
+    </ul>
+    {{/windows}}
+  </script>
+  <script>
+    var templates = [];
+
+    function get_template(template_name) {
+      if (!templates.hasOwnProperty(template_name)) {
+        templates[template_name] = Handlebars.compile(
+          document.getElementById(template_name).innerHTML
+        )
+      }
+      return templates[template_name]
+    }      
+
+    window.addEventListener('message', function(event) {
+      var command = event.data.command;
+      switch(command) {
+        case 'render':
+          var template_name = event.data.template_name
+          var context = event.data.context
+          event.source.postMessage({
+            html: get_template(template_name)(context)
+          }, event.origin);
+        break;
+      }
+    });
+  </script>
+  </body>
+</html>
