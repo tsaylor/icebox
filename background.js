@@ -1,0 +1,40 @@
+function onClickHandler(info, tab) {
+    if (info.menuItemId == "sendtoicebox") {
+        // console.log("item " + info.menuItemId + " was clicked");
+        // console.log(tab.favIconUrl);
+        // console.log(tab.url);
+        // console.log(tab.title);
+        // console.log(tab.id);
+        // console.log(tab.windowId);
+        chrome.storage.local.get('pages', function(data) {
+            data.pages.push({
+                title: tab.title, url: tab.url, icon: tab.favIconUrl});
+            chrome.storage.local.set({pages: data.pages}, function() {
+                chrome.tabs.remove(tab.id);
+            });
+        });
+    }
+};
+
+chrome.contextMenus.onClicked.addListener(onClickHandler);
+chrome.storage.onChanged.addListener(function () {
+    chrome.storage.local.get('pages', function(data) {
+        chrome.storage.local.getBytesInUse(null, function(count){
+            console.log("bytes in use: " + count)
+        });
+    });
+})
+
+// Set up context menu tree at install time.
+chrome.runtime.onInstalled.addListener(function() {
+    // Create one test item for each context type.
+    var context = "page";
+    var title = "Test '" + context + "' menu item";
+    var id = chrome.contextMenus.create({
+        "title": "Send page to Icebox", 
+        "contexts": ["page", "selection"],
+        "id": "sendtoicebox"
+    });
+
+    chrome.storage.local.set({pages: []});
+});

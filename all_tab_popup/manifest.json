@@ -13,17 +13,9 @@
   "sandbox": {
     "pages": ["sandbox.html"]
   },
-  "background": {
-    "persistent": false,
-    "scripts": ["background.js"]
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "default_popup": "popup.html",
+    "default_title": "Click here!"
   },
-  "chrome_url_overrides": {
-    "newtab": "icebox.html"
-  },
-  "permissions": [
-    "tabs",
-    "notifications",
-    "contextMenus",
-    "storage"
-  ]
 }
