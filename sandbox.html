@@ -4,19 +4,10 @@
   <script src="handlebars-v3.0.3.js"></script>
   </head>
   <body>
-  <script id="all_tabs" type="text/x-handlebars-template">
-    {{#windows}}
-    <ul>
-      {{#tabs}}
-      <li><a href="{{url}}">{{title}}</a></li>
-      {{/tabs}}
-    </ul>
-    {{/windows}}
-  </script>
   <script id="icebox_tabs" type="text/x-handlebars-template">
-    <ul>
+    <ul style="list-style-type: none;">
       {{#pages}}
-      <li><img src="{{icon}}" /><a href="{{url}}">{{title}}</a></li>
+      <li><img src="{{icon}}" /> <a class="deleteable" href="{{url}}">{{title}}</a></li>
       {{/pages}}
     </ul>
   </script>

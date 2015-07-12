@@ -7,23 +7,27 @@ function onClickHandler(info, tab) {
         // console.log(tab.id);
         // console.log(tab.windowId);
         chrome.storage.local.get('pages', function(data) {
+            // add tab to storage
             data.pages.push({
                 title: tab.title, url: tab.url, icon: tab.favIconUrl});
             chrome.storage.local.set({pages: data.pages}, function() {
+                // close tab
                 chrome.tabs.remove(tab.id);
+                // pop a notification
+                
             });
         });
     }
 };
 
 chrome.contextMenus.onClicked.addListener(onClickHandler);
-chrome.storage.onChanged.addListener(function () {
-    chrome.storage.local.get('pages', function(data) {
-        chrome.storage.local.getBytesInUse(null, function(count){
-            console.log("bytes in use: " + count)
-        });
-    });
-})
+// chrome.storage.onChanged.addListener(function () {
+//     chrome.storage.local.get('pages', function(data) {
+//         chrome.storage.local.getBytesInUse(null, function(count){
+//             console.log("bytes in use: " + count)
+//         });
+//     });
+// })
 
 // Set up context menu tree at install time.
 chrome.runtime.onInstalled.addListener(function() {
