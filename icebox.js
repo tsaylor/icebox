@@ -32,7 +32,7 @@ window.addEventListener('message', function(event) {
 });
 
 function display_page() {
-    chrome.storage.local.get('pages', function(data) {
+    chrome.storage.sync.get('pages', function(data) {
         render('icebox_tabs', data);
     });
 }
@@ -43,10 +43,10 @@ function remove_from_icebox(url) {
     // open new tab
     chrome.tabs.create({url: url, active: true})
     // remove from storage
-    chrome.storage.local.get('pages', function(data) {
+    chrome.storage.sync.get('pages', function(data) {
         var newPages = data.pages.filter(function (element, index, array) {
             return element.url != url
         });
-        chrome.storage.local.set({pages: newPages});
+        chrome.storage.sync.set({pages: newPages});
     });
 }

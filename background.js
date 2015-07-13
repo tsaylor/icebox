@@ -6,15 +6,15 @@ function onClickHandler(info, tab) {
         // console.log(tab.title);
         // console.log(tab.id);
         // console.log(tab.windowId);
-        chrome.storage.local.get('pages', function(data) {
+        chrome.storage.sync.get('pages', function(data) {
             // add tab to storage
             data.pages.push({
                 title: tab.title, url: tab.url, icon: tab.favIconUrl});
-            chrome.storage.local.set({pages: data.pages}, function() {
+            chrome.storage.sync.set({pages: data.pages}, function() {
                 // close tab
                 chrome.tabs.remove(tab.id);
                 // pop a notification
-                
+
             });
         });
     }
@@ -22,8 +22,8 @@ function onClickHandler(info, tab) {
 
 chrome.contextMenus.onClicked.addListener(onClickHandler);
 // chrome.storage.onChanged.addListener(function () {
-//     chrome.storage.local.get('pages', function(data) {
-//         chrome.storage.local.getBytesInUse(null, function(count){
+//     chrome.storage.sync.get('pages', function(data) {
+//         chrome.storage.sync.getBytesInUse(null, function(count){
 //             console.log("bytes in use: " + count)
 //         });
 //     });
@@ -40,5 +40,5 @@ chrome.runtime.onInstalled.addListener(function() {
         "id": "sendtoicebox"
     });
 
-    chrome.storage.local.set({pages: []});
+    chrome.storage.sync.set({pages: []});
 });
