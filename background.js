@@ -35,7 +35,11 @@ chrome.runtime.onInstalled.addListener(function(details) {
         "id": "sendtoicebox"
     });
 
-    if (details.reason == "install") {
-        chrome.storage.sync.set({pages: []});
+    // data migrations
+    var previousVersion = details.reason == "install" ? "0" : details.previousVersion
+    switch (previousVersion) {
+        case "0":
+            // on fresh install, initialize the storage data
+            chrome.storage.sync.set({pages: [], settings: {storage: "chrome"}});
     }
 });
