@@ -1,4 +1,6 @@
 #!/bin/bash
+
+rm -rf _build/
 mkdir -p _build/icebox
 
 cp background.js _build/icebox/

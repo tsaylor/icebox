@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+      }
+    </style>
+    <script src="options.js"></script>
+  </head>
+  <body>
+    <h2>Icebox Settings</h2>
+    <p>Storage backend:</p>
+    <ul style="list-style-type: None;">
+        <li><input type="radio" name="storage" value="chrome" />Google Cloud</li>
+        <!--li><input type="radio" name="storage" value="special" />My Cloud Thing</li-->
+    </ul>
+    <input id="savebtn" type="button" value="Save" />
+    <br />
+    <input id="exportbtn" type="button" value="Export your data" />
+    <a id="realexportlink" download="data.json" style="display: none;">Invisible link</a>
+  </body>
+</html>
+
