@@ -37,7 +37,7 @@ function display_page() {
     });
 }
 
-window.addEventListener('focus', display_page);
+chrome.tabs.onActivated.addListener(display_page);
 
 function remove_from_icebox(url) {
     // open new tab
