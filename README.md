@@ -1,6 +1,8 @@
 # Icebox (beta)
 This is a tool for tab hoarders. Keeping a tab open eats memory, drains battery life, may do strange things like refresh itself or play videos, and prevents you from applying browser updates that require a restart. Instead of keeping the tab open, stash the url in your Icebox and open it back up when you want it.
 
+[Install it from the Chrome web store.](https://chrome.google.com/webstore/detail/icebox/mglcckbbfmkpppdbghfemkijhemibpdi)
+
 NOTE: This is beta software. Strange things might happen. If you're saving mission critical listicles, be sure to use the "Export your data" feature on the options page.
 
 ## Contributing
