@@ -1,0 +1,9 @@
+Version 2:
+    - Alert user (via notification) when chrome sync storage runs out of space
+    - On install, don't overwrite real data in sync storage from another installation.
+
+Version 1:
+    - Initial public release
+    - Close and store tabs in chrome sync storage
+    - Stored tabs listed on new tab page
+    - Click links to re-open and remove from storage
