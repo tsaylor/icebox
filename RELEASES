@@ -1,3 +1,6 @@
+Version 3:
+    - Fixed bug where the onClickHandler for the context menu wasn't being triggered
+
 Version 2:
     - Alert user (via notification) when chrome sync storage runs out of space
     - On install, don't overwrite real data in sync storage from another installation.

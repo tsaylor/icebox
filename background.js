@@ -30,13 +30,14 @@ function onClickHandler(info, tab) {
     }
 };
 
+chrome.contextMenus.onClicked.addListener(onClickHandler);
+
 chrome.runtime.onInstalled.addListener(function(details) {
     var id = chrome.contextMenus.create({
         "title": "Send page to Icebox", 
         "contexts": ["page", "selection"],
         "id": "sendtoicebox"
     });
-    chrome.contextMenus.onClicked.addListener(onClickHandler);
 
     // data migrations
     var previousVersion = details.reason == "install" ? 0 : parseInt(details.previousVersion)
