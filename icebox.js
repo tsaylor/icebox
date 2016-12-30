@@ -27,6 +27,9 @@ window.addEventListener('message', function(event) {
                     remove_from_icebox(evt.target.href);
                 })
             });
+            chrome.storage.sync.getBytesInUse(null, function(size) {
+                document.getElementById('data_size').innerHTML = size + " bytes in use";
+            });
             break;
     }
 });
